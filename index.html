@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semáforo Emocional</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2, #80deea);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #34495e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .semaforo {
+            background: #2c3e50;
+            padding: 25px;
+            border-radius: 20px;
+            width: 130px;
+            margin: 3rem auto;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .semaforo:before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 60px;
+            background: #2c3e50;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .luz {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 15px auto;
+            border: 4px solid #1a2634;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .luz:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 75%;
+            height: 75%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
+        }
+
+        #rojo {
+            background: #4a0000;
+        }
+        #rojo.activo {
+            background: #ff3b3b;
+            box-shadow: 0 0 40px #ff3b3b;
+        }
+
+        #amarillo {
+            background: #4a4a00;
+        }
+        #amarillo.activo {
+            background: #ffeb3b;
+            box-shadow: 0 0 40px #ffeb3b;
+        }
+
+        #verde {
+            background: #004a00;
+        }
+        #verde.activo {
+            background: #4caf50;
+            box-shadow: 0 0 40px #4caf50;
+        }
+
+        .emocion-info {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: #f8f9fa;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .emocion-info h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .emocion-descripcion {
+            display: none;
+            padding: 1.5rem;
+            margin-top: 1.2rem;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .emocion-descripcion ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .emocion-descripcion li {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .emocion-descripcion li:hover {
+            transform: translateX(10px);
+            background: #e9ecef;
+        }
+
+        .emocion-descripcion.activo {
+            display: block;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-15px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Semáforo de las Emociones</h1>
+        <p>Explora tus emociones haciendo clic en cada luz del semáforo y descubre su significado</p>
+        
+        <div class="semaforo">
+            <div class="luz" id="rojo" onclick="mostrarEmocion('rojo')"></div>
+            <div class="luz" id="amarillo" onclick="mostrarEmocion('amarillo')"></div>
+            <div class="luz" id="verde" onclick="mostrarEmocion('verde')"></div>
+        </div>
+
+        <div class="emocion-info">
+            <div id="emocion-rojo" class="emocion-descripcion">
+                <h3>Rojo - Alto, Detente</h3>
+                <p>Cuando experimentas emociones intensas como:</p>
+                <ul>
+                    <li>🔥 Ira - Momento de canalizar esta energía</li>
+                    <li>😤 Frustración - Aprende de los obstáculos</li>
+                    <li>😠 Rabia - Busca formas saludables de expresión</li>
+                </ul>
+                <p>Toma un momento para respirar profundamente y reflexionar antes de actuar. Tu bienestar es lo más importante.</p>
+            </div>
+
+            <div id="emocion-amarillo" class="emocion-descripcion">
+                <h3>Amarillo - Precaución</h3>
+                <p>Cuando sientes emociones de alerta como:</p>
+                <ul>
+                    <li>😰 Ansiedad - Reconoce tus preocupaciones</li>
+                    <li>🤔 Preocupación - Analiza la situación</li>
+                    <li>😟 Inquietud - Busca claridad mental</li>
+                </ul>
+                <p>Es el momento ideal para hacer una pausa y evaluar la situación con calma y objetividad.</p>
+            </div>
+
+            <div id="emocion-verde" class="emocion-descripcion">
+                <h3>Verde - Adelante</h3>
+                <p>Disfruta de emociones positivas como:</p>
+                <ul>
+                    <li>😌 Calma - Mantén este estado de paz</li>
+                    <li>😊 Tranquilidad - Aprovecha tu equilibrio</li>
+                    <li>🌟 Bienestar - Comparte tu energía positiva</li>
+                </ul>
+                <p>¡Estás en un excelente momento emocional! Aprovecha para avanzar en tus objetivos y compartir tu positividad.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarEmocion(color) {
+            // Resetear todas las luces y descripciones
+            document.querySelectorAll('.luz').forEach(luz => luz.classList.remove('activo'));
+            document.querySelectorAll('.emocion-descripcion').forEach(desc => desc.classList.remove('activo'));
+            
+            // Activar la luz seleccionada y su descripción
+            document.getElementById(color).classList.add('activo');
+            document.getElementById('emocion-' + color).classList.add('activo');
+        }
+    </script>
+</body>
+</html>
